@@ -1,30 +1,20 @@
-for i in {2..9}
+#!/bin/sh
+
+event=(ApplicationActivatedEvent ApplicationMinimizeEvent ControlClickedEvent GlobalChannelListElementClickEvent LoginEvent PageViewEvent ReadingStatsEvent ReadingTimeStatsEvent ShareEvent StockActionEvent StockViewEvent UserCopyEvent UserEventV2 RecFeedClickEvent RecFeedRefreshEvent 	RegistrationEvent SuccessOrderEvent TerminalClickEvent Page_AppearEvent)
+
+for i in {10..12}
 do
   for j in {1..31}
   do
      #hadoop fs -rm -r /flume/events/ApplicationActivatedEvent/2018-0$i-0$j
       if [ $j -le 9 ] ;then
-         #hadoop fs -rm -r /flume/events/ApplicationActivatedEvent/2018-0$i-0$j
-         hadoop fs -rm -r /flume/events/PageViewEvent/2018-0$i-0$j
-         hadoop fs -rm -r /flume/events/ReadingStatsEvent/2018-0$i-0$j
-         hadoop fs -rm -r /flume/events/ReadingTimeStatsEvent/2018-0$i-0$j
-         hadoop fs -rm -r /flume/events/ShareEvent/2018-0$i-0$j
-         hadoop fs -rm -r /flume/events/StockActionEvent/2018-0$i-0$j
-         hadoop fs -rm -r /flume/events/StockViewEvent/2018-0$i-0$j
-         hadoop fs -rm -r /flume/events/UserCopyEvent/2018-0$i-0$j
-         hadoop fs -rm -r /flume/events/UserEventV2/2018-0$i-0$j
-         #echo "2018-0$i-0$j"
+ 	 for m in ${event[@]};do
+	 hadoop fs -rm -r /flume/events/$m/2018-$i-0$j
+         done
       else
-         #hadoop fs -rm -r /flume/events/ApplicationActivatedEvent/2018-0$i-$j
-         hadoop fs -rm -r /flume/events/PageViewEvent/2018-0$i-$j
-         hadoop fs -rm -r /flume/events/ReadingStatsEvent/2018-0$i-$j
-         hadoop fs -rm -r /flume/events/ReadingTimeStatsEvent/2018-0$i-$j
-         hadoop fs -rm -r /flume/events/ShareEvent/2018-0$i-$j
-         hadoop fs -rm -r /flume/events/StockActionEvent/2018-0$i-$j
-         hadoop fs -rm -r /flume/events/StockViewEvent/2018-0$i-$j
-         hadoop fs -rm -r /flume/events/UserCopyEvent/2018-0$i-$j
-         hadoop fs -rm -r /flume/events/UserEventV2/2018-0$i-$j
-         #echo "2018-0$i-$j"
+         for n in ${event[@]};do
+         hadoop fs -rm -r /flume/events/$n/2018-$i-$j
+         done
       fi
   done
 done
