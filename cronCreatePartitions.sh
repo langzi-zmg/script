@@ -22,7 +22,11 @@ while [ "$beg_s" -le "$end_s" ];do
     do
     for j in {0..23}
     do
-    echo "$hivePath -e 'set hive.execution.engine=mr;use bi;alter table $i DROP  IF NOT EXISTS PARTITION (dt=$day,hour=`printf "%02d\n" $j`)'"
+    if [ $j -le 9 ];then
+    $hivePath -e 'set hive.execution.engine=mr;use bi;alter table '$i' ADD PARTITION (dt='\"$day\"',hour='\"0$j\"')'
+    else
+    $hivePath -e 'set hive.execution.engine=mr;use bi;alter table '"$i"' ADD PARTITION (dt='\"$day\"',hour='\"$j\"')'
+    fi
     done
     done
 done
