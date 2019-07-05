@@ -97,14 +97,14 @@ def post_shipper_info(auth, host, headers,service):
         },
         "filter_rules": [{
             "key": "__CONTENT__",
-            "regex": '.*?' + service_name + '-[0-9A-Za-z]+.*?',
+            "regex": '.*?"(' + service + ')".*?',
             "value": service
         }]
     }
     print params
-    call_api('post', host, uri, headers,params) 
+    call_api('post', host, uri, headers,None,params) 
 
-def call_api(method, host, uri, headers, params):
+def call_api(method, host, uri, headers, params,data=None):
     sign = auth.get_sign(method, uri, {}, {})
     headers['Authorization'] = sign
     
@@ -133,8 +133,8 @@ def search_log(auth, host, headers):
 
 
 if __name__ == '__main__':
-    secretid = '***'
-    secretkey = '***'
+    secretid = 'AKIDabZJOMXIIiWIHBMxc7n05Q7votyfAboq'
+    secretkey = '61mMK7kCUfieTtEQQHxUtEONSOPG7mEV'
     host = 'ap-shanghai.cls.myqcloud.com'
     auth = auth(secretid, secretkey)
     headers = {'host': host}
