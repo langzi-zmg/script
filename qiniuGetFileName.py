@@ -3,8 +3,8 @@ from qiniu import Auth
 from qiniu import BucketManager
 import json
 
-access_key = 'RQ-0qS4uk-PuRfCiSHyDnfwbS5TPj8vp1fMej5IQ'
-secret_key = 'zaYQPfYpTGklojTBzVh2Vv7S2IQvkipedQCpvGgb'
+access_key = '**'
+secret_key = '**'
 
 q = Auth(access_key, secret_key)
 bucket = BucketManager(q)
