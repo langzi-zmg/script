@@ -3,10 +3,7 @@ namespace=$1
 pod_name=$2
 container_name=$3
 
-kubectl get pods -n $namespace $pod_name
-ifNotFound=$?
-
-if [ "$ifNotFound" -eq "0" ];
+if kubectl get pods -n $namespace $pod_name
 then
   reason=`kubectl describe pods -n $namespace $pod_name | grep "Reason:" | cut -d : -f 2`
 if [ $reason = 'OOMKilled' ];
