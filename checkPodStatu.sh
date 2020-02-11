@@ -6,6 +6,8 @@ container_name=$3
 if kubectl get pods -n $namespace $pod_name
 then
   reason=`kubectl describe pods -n $namespace $pod_name | grep "Reason:" | cut -d : -f 2`
+if [$reason];
+then
 if [ $reason = 'OOMKilled' ];
 then
   echo  The reason of $pod_name restart is $reason.
@@ -25,6 +27,9 @@ then
   ssh $ip
 else
   echo This reason $reason is not OOMKilled or panic Error ,please manual inspection.
+fi
+else
+  echo pods $pod_name is running
 fi
 else
   echo pods $pod_name not found
