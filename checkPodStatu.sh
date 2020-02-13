@@ -6,7 +6,7 @@ container_name=$3
 if kubectl get pods -n $namespace $pod_name
 then
   reason=`kubectl describe pods -n $namespace $pod_name | grep "Reason:" | cut -d : -f 2`
-if [$reason];
+if [ $reason ];
 then
 if [ $reason = 'OOMKilled' ];
 then
