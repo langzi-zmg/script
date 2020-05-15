@@ -8,10 +8,10 @@ then
   reason=`kubectl describe pods -n $namespace $pod_name | grep "Reason:" | cut -d : -f 2`
 if [ $reason ];
 then
-if [ $reason = 'OOMKilled' ];
+if [ '$reason' = 'OOMKilled' ];
 then
   echo  The reason of $pod_name restart is $reason.
-elif [ $reason = 'Error' ];
+elif [ '$reason' = 'Error' ];
 then
   echo The reason of $pod_name restart is code panic...
   ip=`kubectl get pods -n $namespace -o wide | grep $pod_name | awk '{print $7}'`
